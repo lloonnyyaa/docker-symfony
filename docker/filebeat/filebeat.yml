@@ -1,0 +1,39 @@
+#filebeat.config.inputs:
+#  path: ${path.config}/prospectors.d/*.yml
+#  reload.enabled: false
+ 
+filebeat.modules:
+- module: system
+  syslog:
+    enabled: true
+    var.paths: ["/var/log/host/system.log*"]
+
+- module: nginx
+  access:
+    enabled: true
+    var.paths: ["/var/log/nginx/project_access.log*"]
+  error:
+    enabled: true
+    var.paths: 
+      - "/var/log/nginx/project_error.log*"
+      - "/var/log/nginx/error.log*"
+
+- module: mysql
+  error:
+    enabled: true
+    var.paths: ["/var/log/mysql/error.log*"]
+  slowlog:
+    enabled: true
+    var.paths: ["/var/log/mysql/mysql-slow.log*"]
+
+output.logstash:
+  enabled: true
+  hosts: ["elk:5044"]
+  timeout: 15
+  ssl:
+    certificate_authorities:
+    - /etc/pki/tls/certs/logstash-beats.crt
+
+setup.kibana:
+  host: "elk:5601"
+  dashboards.enabled: true
