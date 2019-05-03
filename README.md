@@ -40,7 +40,7 @@
     docker-compose run composer install
     ```
 
-    or, before step 5, you can uncomment 'command: install' string in docker/docker-compose.yml file in composer service section.
+    or, before step 5, you can uncomment 'command: install' line in docker/docker-compose.yml file in composer service section.
 
 7. 
     Yor project available in http://localhost/
