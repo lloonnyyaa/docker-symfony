@@ -47,6 +47,10 @@ If used webpack to build frontend run
 ```bash
 docker-compose run node yarn encore production
 ```
+Run symfony commands 
+```bash
+docker-compose run php bin/console list
+```
 
 ### Other links:
 * phpMyAdmin http://localhost:8080/
