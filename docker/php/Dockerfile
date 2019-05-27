@@ -28,7 +28,8 @@ RUN apk add --update \
     php7-xdebug \
     php7-zip \
     make \
-    curl
+    curl \
+    composer
 
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
