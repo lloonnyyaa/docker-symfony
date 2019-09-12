@@ -88,6 +88,7 @@ services:
             - "./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml"
             - "../data/logs/nginx/:/var/log/nginx/"
             - "../data/logs/mysql/:/var/log/mysql/"
+            - "${APP_DIR}/var/log/:/var/log/symfony/"
             - "../data/elk/filebeat:/usr/share/filebeat/data/"
         command: filebeat -e -strict.perms=false
         restart: on-failure

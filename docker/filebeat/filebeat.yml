@@ -1,7 +1,12 @@
 #filebeat.config.inputs:
 #  path: ${path.config}/prospectors.d/*.yml
 #  reload.enabled: false
- 
+filebeat.inputs:
+- paths:
+  - /var/log/symfony/dev.log
+  input_type: log
+  document_type: symfony-dev
+
 filebeat.modules:
 - module: system
   syslog:
@@ -14,7 +19,7 @@ filebeat.modules:
     var.paths: ["/var/log/nginx/project_access.log*"]
   error:
     enabled: true
-    var.paths: 
+    var.paths:
       - "/var/log/nginx/project_error.log*"
       - "/var/log/nginx/error.log*"
 
