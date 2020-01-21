@@ -67,39 +67,39 @@ services:
         restart: always
         depends_on:
             - mysqldb
-#    elk:
-#        image: sebp/elk
-#        container_name: elk
-#        ports:
-#            - "5601:5601"
-#            - "9200:9200"
-#            - "5044:5044"
-#        volumes:
-#            - "../data/elk/elasticsearch:/var/lib/elasticsearch"
-#        networks: 
-#            - elknet
-#        restart: on-failure
-#    filebeat:
-#        container_name: filebeat
-#        user: root
-#        image: docker.elastic.co/beats/filebeat:${ELASTIC_VERSION}
-#        volumes:
-#            - "./filebeat/logstash-beats.crt:/etc/pki/tls/certs/logstash-beats.crt"
-#            - "./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml"
-#            - "../data/logs/nginx/:/var/log/nginx/"
-#            - "../data/logs/mysql/:/var/log/mysql/"
-#            - "${APP_DIR}/var/log/:/var/log/symfony/"
-#            - "../data/elk/filebeat:/usr/share/filebeat/data/"
-#        command: filebeat -e -strict.perms=false
-#        restart: on-failure
-#        depends_on:
-#            - elk
-#        networks: 
-#            - elknet
+    elk:
+        image: sebp/elk
+        container_name: elk
+        ports:
+            - "5601:5601"
+            - "9200:9200"
+            - "5044:5044"
+        volumes:
+            - "../data/elk/elasticsearch:/var/lib/elasticsearch"
+        networks: 
+            - elknet
+        restart: on-failure
+    filebeat:
+        container_name: filebeat
+        user: root
+        image: docker.elastic.co/beats/filebeat:${ELASTIC_VERSION}
+        volumes:
+            - "./filebeat/logstash-beats.crt:/etc/pki/tls/certs/logstash-beats.crt"
+            - "./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml"
+            - "../data/logs/nginx/:/var/log/nginx/"
+            - "../data/logs/mysql/:/var/log/mysql/"
+            - "${APP_DIR}/var/log/:/var/log/symfony/"
+            - "../data/elk/filebeat:/usr/share/filebeat/data/"
+        command: filebeat -e -strict.perms=false
+        restart: on-failure
+        depends_on:
+            - elk
+        networks: 
+            - elknet
 volumes:
     php:
     nginx:
         
-#networks:
-#    elknet:
-#        driver: bridge
+networks:
+    elknet:
+        driver: bridge
